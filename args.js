@@ -26,6 +26,7 @@ function parse (argv) {
     .option('--no-timeouts', 'disables timeouts')
     .option('--recursive', 'include sub directories')
     .option('--renderer', 'run tests in renderer process')
+    .option('--interactive', 'leave electron window open when running tests in the renderer process')
 
   program.on('globals', function (val) {
     globals = globals.concat(list(val))

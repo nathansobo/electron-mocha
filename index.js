@@ -29,12 +29,17 @@ app.on('ready', function () {
   } else {
     var win = window.createWindow({ height: 700, width: 1200, 'web-preferences': { 'web-security': false } })
     var indexPath = path.resolve(path.join(__dirname, './renderer/index.html'))
-    // undocumented call in electron-window
-    win._loadUrlWithArgs(indexPath, opts, Function())
-    // win.showUrl(indexPath, opts)
-    ipc.on('mocha-done', function (event, code) {
-      exit(code)
-    })
+
+    if (opts.interactive) {
+      win.showUrl(indexPath, opts)
+    } else {
+      // undocumented call in electron-window
+      win._loadUrlWithArgs(indexPath, opts, Function())
+      // win.showUrl(indexPath, opts)
+      ipc.on('mocha-done', function (event, code) {
+        exit(code)
+      })
+    }
   }
 })
 
