@@ -32,10 +32,10 @@ app.on('ready', function () {
 
     if (opts.interactive) {
       win.showUrl(indexPath, opts)
+      win.openDevTools({})
     } else {
       // undocumented call in electron-window
       win._loadUrlWithArgs(indexPath, opts, Function())
-      // win.showUrl(indexPath, opts)
       ipc.on('mocha-done', function (event, code) {
         exit(code)
       })
